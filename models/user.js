@@ -35,7 +35,9 @@ const userSchema = Schema({
 //El metodo toJSON del userSchema se sobrescribe por la funcion
 userSchema.methods.toJSON = function(){
     //Se desesctructura el objeto y se scan el __v y la contraseña 
-    const { __v, password, ...user }  = this.toObject();
+    const { __v, password, _id, ...user }  = this.toObject();
+
+    user.uid = _id;
 
     //Se regresa a info del usuario sin la version y la contra
     return user;

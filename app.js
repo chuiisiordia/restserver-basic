@@ -3,5 +3,7 @@ require('dotenv').config();
 
 const server = new Server();
 
+console.clear();
+
 server.listen();
 
