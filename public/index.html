@@ -34,12 +34,16 @@
 </html>
 
 <script>
+    var url = ( window.location.hostname.includes('localhost') )
+                ? 'http://localhost:3312/api/auth/google'
+                : 'https://chuii-restapp.herokuapp.com/api/auth/google'
+
     function handleCredentialResponse(response) {
        //console.log( response.credential );
 
        const body = { id_token:response.credential };
 
-       fetch('http://localhost:3312/api/auth/google', {
+       fetch(url, {
            method:'POST',
            headers:{
                'Content-Type':'application/json'
