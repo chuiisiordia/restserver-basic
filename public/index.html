@@ -4,9 +4,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso denegado</title>
+    <title>Google Sign-In</title>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-    <h1>Acceso denegado</h1>
+    <h1>Google Sign-In</h1>
+
+    <hr>
+
+    <div id="g_id_onload"
+        data-client_id="1085252094398-l3t6baotgnl3ki3av3t9je8drnroanp1.apps.googleusercontent.com"
+        data-login_uri="https://your.domain/your_login_endpoint"
+        data-callback="handleCredentialResponse"
+        data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+        data-type="standard"
+        data-size="large"
+        data-theme="outline"
+        data-text="sign_in_with"
+        data-shape="rectangular"
+        data-logo_alignment="left">
+    </div>
+
+    <button id="google_out">Salir</button>
+    
 </body>
 </html>
+
+<script>
+    function handleCredentialResponse(response) {
+       //console.log( response.credential );
+
+       const body = { id_token:response.credential };
+
+       fetch('http://localhost:3312/api/auth/google', {
+           method:'POST',
+           headers:{
+               'Content-Type':'application/json'
+           },
+           body: JSON.stringify(body)
+       })
+        .then( res => res.json() )
+        .then( res => {
+            console.log( res );
+
+            localStorage.setItem('mail', res.user.mail );
+        })
+        .catch( console.warn );
+    }
+
+    const button = document.getElementById('google_out');
+    button.onclick = () => {
+        console.log( google.accounts.id );
+
+        google.accounts.id.revoke( localStorage.getItem('mail'), done =>{
+            localStorage.clear();
+
+            location.reload();
+        });
+    }
+</script>

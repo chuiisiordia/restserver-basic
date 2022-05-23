@@ -62,9 +62,9 @@ const userPost = async(req, res=response ) => {
         return res.status(400).json(errors);
     } */
 
-    const { name, mail, password, role } = req.body;
+    const { name, mail, password, role} = req.body;
 
-    const user = new User( { name, mail, password, role } );
+    const user = new User( { name, mail, password, role} );
 
     //Verificar si correo exist
     /* const mail_exist = await User.findOne({ mail:mail });
@@ -82,7 +82,6 @@ const userPost = async(req, res=response ) => {
     await user.save();
 
     res.json({
-
         user
     });
 }

@@ -1,0 +1,26 @@
+//Generar variable de entorno heroku
+heroku config:set Variable='valor de la variable'
+
+//Prepara los cambios
+git add .
+
+//Agregar comentario a los cambios nuevos
+git commit -m 'cometnarioa'
+
+//Subir a heroku
+git push heroku main
+
+//Generar tag en git
+git tag -a v0.0.2 -m "Fin seccion 9"
+git push --tags
+
+
+//Borrar archivo del git
+git rm .env --cached
+
+//Mostrar estatus de comando git
+git status
+
+//Ver logs de heroku
+heroku logs -n 100
+heroku logs -n 100 --tail
