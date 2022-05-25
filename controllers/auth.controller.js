@@ -72,7 +72,8 @@ const google = async( req, res ) => {
                 mail, 
                 password:':p',
                 google:true,
-                role:'USER_ROLE'
+                role:'USER_ROLE',
+                img
             };
 
             user = new User( data );

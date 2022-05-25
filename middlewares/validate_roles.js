@@ -28,9 +28,9 @@ const hasRole = ( ...roles ) => {
                 msg:'Se quiere verificar el rol sin validar el token antes'
             });
         }
-        
+
         if( !roles.includes( req.session_user.role ) ){
-            res.status(401).json({
+            return res.status(401).json({
                 msg:'El usuario no tiene un rol autorizado'
             });
         }

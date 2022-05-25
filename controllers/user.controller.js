@@ -3,17 +3,9 @@ const bcryptjs = require('bcryptjs');
 //const { validationResult } = require('express-validator');
 
 const User = require('../models/user');
-const user = require('../models/user');
 
 const userGet = async(req, res=response ) => {
     const { limit = 5, from=0 } = req.query;
-
-    /* const users = await User.find({ status:true })
-        .skip( from )
-        .limit( Number(limit) );
-
-    const total = await User.countDocuments({ status:true }); */
-    
 
     const answer = [ total, users ] = await Promise.all([
         User.countDocuments({ status:true }),
@@ -27,8 +19,8 @@ const userGet = async(req, res=response ) => {
     res.json({
         total,
         shown,
-        users,
-        answer
+        answer,
+        users
     });
 }
 
@@ -62,9 +54,9 @@ const userPost = async(req, res=response ) => {
         return res.status(400).json(errors);
     } */
 
-    const { name, mail, password, role} = req.body;
+    const { name, mail, password, role, img} = req.body;
 
-    const user = new User( { name, mail, password, role} );
+    const user = new User( { name, mail, password, role, img} );
 
     //Verificar si correo exist
     /* const mail_exist = await User.findOne({ mail:mail });
