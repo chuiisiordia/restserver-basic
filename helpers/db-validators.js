@@ -38,10 +38,21 @@ const productIdExists = async( id ) => {
         throw new Error(`El id ${id} no exite en los productos`);
 }
 
+const permitedColections = ( colection='', colections = [] ) => {
+    const is_included = colections.includes( colection );
+
+    if( !is_included ){
+        throw new Error(`La coleccion ${colection} no es permitida, (${colections})`);
+    }
+
+    return true;
+}
+
 module.exports = {
     isValidRole,
     userMailExists,
     userIdExists,
     categoryIdExists,
-    productIdExists
+    productIdExists,
+    permitedColections
 }
